@@ -1,7 +1,7 @@
 const API_URL = "https://pokeapi.co/api/v2/pokemon";
 
 export const obtenerTodosLosPokemon = async () => {
-    const respuesta = await fetch(`${API_URL}`);
+    const respuesta = await fetch(`${API_URL}?limit=151`);
 
     if (!respuesta.ok) throw new Error("No se pudo obtener la lista");
     const datos = await respuesta.json();

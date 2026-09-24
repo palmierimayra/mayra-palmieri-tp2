@@ -1,0 +1,7 @@
+.card-pokedex {
+  background-image: url("../img/Pokedex.png");
+  background-size: cover;
+  background-position: top;
+  aspect-ratio: 3 / 4;
+  padding: 20% 12% 10%;
+}

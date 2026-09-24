@@ -1,5 +1,3 @@
-ui.js
-
 export const mostrarSpinner = () => {
   document.querySelector("#spinner").classList.remove("d-none");
 };

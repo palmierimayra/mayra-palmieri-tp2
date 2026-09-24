@@ -9,9 +9,19 @@ import {
 
 const inputPokemon = document.querySelector("#pokemonId");
 const botonBuscar = document.querySelector("#btnBuscar");
+const botonVolver = document.querySelector("#btnVolver");
 const contenedorResultado = document.querySelector("#resultado");
 
 let todos = [];
+
+const mostrarError = (texto) => {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: texto,
+    confirmButtonColor: "#dc3545",
+  });
+};
 
 const mostrarLista = (lista) => {
   contenedorResultado.innerHTML = lista.map(renderPokemon).join("");
@@ -23,7 +33,7 @@ const cargarTodos = async () => {
     todos = await obtenerTodosLosPokemon();
     mostrarLista(todos);
   } catch (error) {
-    mostrarMensaje(error.message);
+    mostrarError("No se pudo cargar la lista de Pokémon. Intente de nuevo más tarde.");
   } finally {
     ocultarSpinner();
   }
@@ -34,7 +44,7 @@ const buscarPokemon = () => {
   limpiarMensaje();
 
   if (!busqueda) {
-    mostrarLista(todos);
+    mostrarError("Debe ingresar un nombre o ID.");
     return;
   }
 
@@ -44,14 +54,25 @@ const buscarPokemon = () => {
 
   if (encontrados.length === 0) {
     contenedorResultado.innerHTML = "";
-    mostrarMensaje("No se encontró ningún Pokemon con ese nombre o ID.");
+    mostrarError("El Pokémon solicitado no existe.");
     return;
   }
 
   mostrarLista(encontrados);
 };
 
+const volver = () => {
+  inputPokemon.value = "";
+  if (todos.length > 0) {
+    mostrarLista(todos);
+  } else {
+    cargarTodos(); 
+  }
+  inputPokemon.focus();
+};
+
 botonBuscar.addEventListener("click", buscarPokemon);
+botonVolver.addEventListener("click", volver);
 
 inputPokemon.addEventListener("keydown", (e) => {
   if (e.key === "Enter") buscarPokemon();
