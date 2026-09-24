@@ -1,29 +1,19 @@
 import { obtenerTodosLosPokemon } from "./services/pokemonService.js";
-import { renderPokemon } from "./components/pokemonCard.js";
 import {
   mostrarSpinner,
   ocultarSpinner,
+  mostrarLista,
+  limpiarResultados,
+  obtenerBusqueda,
+  limpiarInput,
+  mostrarError,
 } from "./helpers/ui.js";
 
-const inputPokemon = document.querySelector("#pokemonId");
 const botonBuscar = document.querySelector("#btnBuscar");
 const botonVolver = document.querySelector("#btnVolver");
-const contenedorResultado = document.querySelector("#resultado");
+const inputPokemon = document.querySelector("#pokemonId");
 
 let todos = [];
-
-const mostrarError = (texto) => {
-  Swal.fire({
-    icon: "error",
-    title: "Error",
-    text: texto,
-    confirmButtonColor: "#dc3545",
-  });
-};
-
-const mostrarLista = (lista) => {
-  contenedorResultado.innerHTML = lista.map(renderPokemon).join("");
-};
 
 const cargarTodos = async () => {
   mostrarSpinner();
@@ -38,7 +28,7 @@ const cargarTodos = async () => {
 };
 
 const buscarPokemon = () => {
-  const busqueda = inputPokemon.value.trim().toLowerCase();
+  const busqueda = obtenerBusqueda();
 
   if (!busqueda) {
     mostrarError("Debe ingresar un nombre o ID.");
@@ -50,7 +40,7 @@ const buscarPokemon = () => {
   );
 
   if (encontrados.length === 0) {
-    contenedorResultado.innerHTML = "";
+    limpiarResultados();
     mostrarError("El Pokémon buscado no existe.");
     return;
   }
@@ -59,13 +49,8 @@ const buscarPokemon = () => {
 };
 
 const volver = () => {
-  inputPokemon.value = "";
-  if (todos.length > 0) {
-    mostrarLista(todos);
-  } else {
-    cargarTodos(); 
-  }
-  inputPokemon.focus();
+  limpiarInput();
+  todos.length > 0 ? mostrarLista(todos) : cargarTodos();
 };
 
 botonBuscar.addEventListener("click", buscarPokemon);
