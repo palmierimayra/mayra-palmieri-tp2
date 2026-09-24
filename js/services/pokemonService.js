@@ -13,7 +13,7 @@ export const obtenerPokemon = async (id) => {
     const respuesta = await fetch(`${API_URL}/${id}`);
 
     if (!respuesta.ok) {
-        throw new Error("No se pudo obtener el pokemon");
+        throw new Error("No se pudo obtener el pokemon.");
     }
 
     const pokemon = await respuesta.json();

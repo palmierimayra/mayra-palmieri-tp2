@@ -3,8 +3,6 @@ import { renderPokemon } from "./components/pokemonCard.js";
 import {
   mostrarSpinner,
   ocultarSpinner,
-  mostrarMensaje,
-  limpiarMensaje,
 } from "./helpers/ui.js";
 
 const inputPokemon = document.querySelector("#pokemonId");
@@ -33,7 +31,7 @@ const cargarTodos = async () => {
     todos = await obtenerTodosLosPokemon();
     mostrarLista(todos);
   } catch (error) {
-    mostrarError("No se pudo cargar la lista de Pokémon. Intente de nuevo más tarde.");
+    mostrarError("No se pudieron cargar los pokémon.");
   } finally {
     ocultarSpinner();
   }
@@ -41,7 +39,6 @@ const cargarTodos = async () => {
 
 const buscarPokemon = () => {
   const busqueda = inputPokemon.value.trim().toLowerCase();
-  limpiarMensaje();
 
   if (!busqueda) {
     mostrarError("Debe ingresar un nombre o ID.");
@@ -54,7 +51,7 @@ const buscarPokemon = () => {
 
   if (encontrados.length === 0) {
     contenedorResultado.innerHTML = "";
-    mostrarError("El Pokémon solicitado no existe.");
+    mostrarError("El Pokémon buscado no existe.");
     return;
   }
 

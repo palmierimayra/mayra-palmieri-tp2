@@ -17,14 +17,12 @@
                     <img src="img/logo.png" alt="Buscador de Pokémon" height="80">
                 </h1>
             </div>
-            <div class="col-md ms-md-auto" style="max-width: 600px;">
+            <div class="col-md-8 col-lg-7 ms-md-auto">
                 <label for="pokemonId" class="visually-hidden">Buscar Pokémon por nombre o ID</label>
-                <div class="input-group input-group-lg shadow">
-                    <input id="pokemonId" type="text" class="form-control border-0"
-                           placeholder="Ingrese un nombre o ID" autocomplete="off">
-                    <button id="btnBuscar" type="button" class="btn btn-warning fw-bold px-4">Buscar</button>
-                    <button id="btnVolver" type="button" class="btn btn-light fw-bold px-3">Volver</button>
-
+                <div class="d-flex gap-2">
+                    <input id="pokemonId" type="text" class="form-control border-0" placeholder="Ingrese un nombre o ID">
+                    <button id="btnBuscar" type="button" class="btn btn-warning btn-lg fw-bold px-4 shadow">Buscar</button>
+                    <button id="btnVolver" type="button" class="btn btn-light btn-lg fw-bold px-3 shadow">Volver</button>
                 </div>
             </div>
         </div>
@@ -44,10 +42,6 @@
 
         <div id="resultado" class="row g-4 mb-5"></div>
     </main>
-
-    <footer class="border-top py-3 text-center text-muted small">
-        Datos de <a href="https://pokeapi.co" target="_blank" rel="noopener" class="link-dark fw-bold">PokeAPI</a>
-    </footer>
 
     <!-- JAVASCRIPT -->
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
